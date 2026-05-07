@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pedra & Forma Engenharia — Kit de Artes</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #111; padding: 32px; font-family: 'Barlow', sans-serif; }
+
+  h1.page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: #F5EDD9;
+    margin-bottom: 6px;
+  }
+  .page-sub {
+    font-size: 12px;
+    color: #A08060;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+
+  .kit {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  .card { position: relative; overflow: hidden; border-radius: 6px; }
+
+  /* fotos de fundo */
+  .photo { position: absolute; inset: 0; background-size: cover; background-position: center; width: 100%; height: 100%; }
+
+  /* overlays */
+  .ov-dark      { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(28,23,20,.45) 0%, rgba(28,23,20,.82) 100%); }
+  .ov-bottom    { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(28,23,20,.95) 0%, rgba(28,23,20,.2) 50%, transparent 100%); }
+  .ov-center    { position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(28,23,20,.3) 0%, rgba(28,23,20,.75) 100%); }
+  .ov-cream     { position: absolute; inset: 0; background: #F5EDD9; }
+  .ov-dark-full { position: absolute; inset: 0; background: #1C1714; }
+
+  .content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; }
+
+  /* logo */
+  .logo-bar { display: flex; align-items: center; gap: 7px; padding: 16px 18px 0; }
+  .logo-sq  { width: 24px; height: 24px; background: #C8A96E; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .logo-sq svg { width: 14px; height: 14px; }
+  .logo-txt { font-family: 'Playfair Display', serif; font-size: 11px; font-weight: 700; color: #F5EDD9; letter-spacing: .05em; }
+  .logo-sub { font-size: 7px; color: #C8A96E; letter-spacing: .2em; text-transform: uppercase; }
+  .logo-dark .logo-txt { color: #1C1714; }
+
+  /* tipografia */
+  .eyebrow   { font-size: 8px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: #C8A96E; }
+  h1, h2, h3 { font-family: 'Playfair Display', serif; line-height: 1.05; }
+  .title-light { color: #F5EDD9; }
+  .title-dark  { color: #1C1714; }
+  .title-em    { color: #C8A96E; font-style: italic; }
+
+  .divider      { width: 32px; height: 1px; background: #C8A96E; margin: 12px 0; }
+  .desc-light   { font-size: 10px; color: rgba(245,237,217,.7); line-height: 1.6; }
+  .desc-dark    { font-size: 10px; color: #A08060; line-height: 1.6; }
+
+  .tag         { display: inline-block; background: #C8A96E; color: #1C1714; font-size: 8px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; padding: 5px 12px; }
+  .tag-outline { display: inline-block; border: .5px solid #C8A96E; color: #C8A96E; font-size: 8px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; padding: 5px 12px; }
+
+  .cta-btn         { background: #C8A96E; color: #1C1714; font-family: 'Barlow', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; border: none; padding: 10px 20px; cursor: pointer; display: inline-block; }
+  .cta-btn-outline { background: transparent; border: .5px solid #C8A96E; color: #C8A96E; font-family: 'Barlow', sans-serif; font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; padding: 10px 20px; cursor: pointer; display: inline-block; }
+
+  .site      { font-size: 8px; color: rgba(245,237,217,.4); letter-spacing: .12em; }
+  .site-dark { font-size: 8px; color: #A08060; letter-spacing: .12em; }
+
+  /* ── CARD 1: Hero ── */
+  .c1 { height: 360px; }
+  .c1 .photo { background-image: url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80'); }
+  .c1 .content { justify-content: space-between; padding-bottom: 20px; }
+  .c1 h1 { font-size: 30px; padding: 0 18px; }
+
+  /* ── CARD 2: Serviços creme ── */
+  .c2 { height: 360px; }
+  .c2 .content { background: #F5EDD9; justify-content: space-between; padding: 22px; }
+  .svc-list { list-style: none; margin-top: 14px; }
+  .svc-item { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: .5px solid #D9CFBC; font-size: 11px; color: #2A2018; }
+  .svc-item:first-child { border-top: .5px solid #D9CFBC; }
+  .svc-n   { font-family: 'Playfair Display', serif; font-size: 10px; color: #C8A96E; font-style: italic; min-width: 16px; }
+  .svc-arr { color: #C8A96E; margin-left: auto; font-size: 14px; }
+
+  /* ── CARD 3: Foto fachada ── */
+  .c3 { height: 360px; }
+  .c3 .photo { background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80'); }
+  .c3 .content { justify-content: space-between; padding-bottom: 20px; padding-left: 18px; padding-right: 18px; }
+  .c3 h2 { font-size: 24px; }
+
+  /* ── CARD 4: Lançamento wide ── */
+  .c4 { grid-column: span 2; height: 240px; }
+  .c4 .photo { background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=80'); }
+  .c4 .content { flex-direction: row; align-items: stretch; }
+  .c4-left  { flex: 1; display: flex; flex-direction: column; justify-content: space-between; padding: 26px 30px; }
+  .c4-right { width: 200px; display: flex; flex-direction: column; justify-content: center; align-items: center; background: rgba(200,169,110,.93); padding: 20px; gap: 6px; }
+  .c4-right .price-label { font-size: 8px; letter-spacing: .18em; text-transform: uppercase; color: #1C1714; opacity: .7; }
+  .c4-right .price-val   { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 900; color: #1C1714; line-height: 1; }
+  .c4-right .price-sub   { font-size: 8px; color: #3A2A18; letter-spacing: .08em; text-align: center; }
+  .c4 h2 { font-size: 30px; }
+
+  /* ── CARD 5: Foto imóvel ── */
+  .c5 { height: 240px; }
+  .c5 .photo { background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&q=80'); }
+  .c5 .content { justify-content: space-between; padding: 16px 18px; }
+  .c5 h2 { font-size: 22px; }
+
+  /* ── CARD 6: Dark institucional ── */
+  .c6 { height: 240px; }
+  .c6 .content { background: #1C1714; justify-content: space-between; padding: 22px; }
+  .c6 h2 { font-size: 22px; }
+
+  /* ── CARD 7: Banner interior wide ── */
+  .c7 { grid-column: span 3; height: 210px; }
+  .c7 .photo { background-image: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80'); }
+  .c7 .content { justify-content: center; align-items: center; text-align: center; gap: 12px; }
+  .c7 h2 { font-size: 36px; }
+
+  /* ── CARD 8: Área gourmet ── */
+  .c8 { height: 260px; }
+  .c8 .photo { background-image: url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80'); }
+  .c8 .content { justify-content: space-between; padding: 16px 18px; }
+  .c8 h2 { font-size: 20px; }
+
+  /* ── CARD 9: Amenidades dark ── */
+  .c9 { height: 260px; }
+  .c9 .content { background: #2A2018; justify-content: space-between; padding: 22px; }
+  .c9 h2 { font-size: 20px; color: #F5EDD9; margin: 10px 0 16px; }
+  .amenities { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .am-item  { border: .5px solid #3A3026; padding: 10px; }
+  .am-icon  { font-size: 16px; color: #C8A96E; margin-bottom: 6px; }
+  .am-label { font-size: 9px; color: #A08060; letter-spacing: .08em; }
+
+  /* ── CARD 10: Depoimento ── */
+  .c10 { height: 260px; }
+  .c10 .photo { background-image: url('https://images.unsplash.com/photo-1628744448840-55bdb2497bd4?w=600&q=80'); }
+  .c10 .content { justify-content: space-between; padding: 14px 18px; }
+  .quote-mark { font-family: 'Playfair Display', serif; font-size: 52px; color: #C8A96E; line-height: .8; margin-bottom: 6px; }
+  .quote-text { font-family: 'Playfair Display', serif; font-size: 13px; font-style: italic; color: #F5EDD9; line-height: 1.4; }
+  .quote-auth { font-size: 8px; letter-spacing: .14em; text-transform: uppercase; color: #C8A96E; margin-top: 10px; }
+
+  /* ── rodapé da página ── */
+  .page-footer {
+    max-width: 1080px;
+    margin: 24px auto 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: .5px solid #2A2018;
+    padding-top: 16px;
+  }
+  .page-footer span { font-size: 10px; color: #5A4A38; letter-spacing: .1em; }
+</style>
+</head>
+<body>
+
+<div style="max-width:1080px;margin:0 auto 24px;">
+  <h1 class="page-title">Pedra & Forma Engenharia</h1>
+  <div class="page-sub">Kit de Artes — Redes Sociais · 2025</div>
+</div>
+
+<div class="kit">
+
+  <!-- 1: HERO -->
+  <div class="card c1">
+    <div class="photo"></div>
+    <div class="ov-dark"></div>
+    <div class="content">
+      <div class="logo-bar">
+        <div class="logo-sq"><svg viewBox="0 0 14 14" fill="none"><rect x="1" y="7" width="5" height="6" fill="#1C1714"/><rect x="8" y="1" width="5" height="6" fill="#1C1714"/><rect x="8" y="8" width="5" height="5" fill="#1C1714" opacity=".4"/></svg></div>
+        <div><div class="logo-txt">Pedra & Forma</div><div class="logo-sub">Engenharia</div></div>
+      </div>
+      <div style="padding: 0 18px;">
+        <div class="eyebrow" style="margin-bottom:12px;">Incorporadora Premium · Salvador</div>
+        <h1 class="title-light">Mais do que<br>uma casa —<br><em class="title-em">um legado.</em></h1>
+        <div class="divider"></div>
+        <p class="desc-light">18 anos construindo histórias com precisão técnica e sensibilidade estética.</p>
+      </div>
+      <div style="padding: 0 18px; display:flex; justify-content:space-between; align-items:center;">
+        <div class="cta-btn">Saiba mais</div>
+        <div class="site">pedraforma.com.br</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2: SERVIÇOS CREME -->
+  <div class="card c2">
+    <div class="ov-cream"></div>
+    <div class="content">
+      <div>
+        <div class="logo-bar logo-dark" style="padding:0;">
+          <div class="logo-sq"><svg viewBox="0 0 14 14" fill="none"><rect x="1" y="7" width="5" height="6" fill="#1C1714"/><rect x="8" y="1" width="5" height="6" fill="#1C1714"/><rect x="8" y="8" width="5" height="5" fill="#1C1714" opacity=".4"/></svg></div>
+          <div><div class="logo-txt" style="color:#1C1714;">Pedra & Forma</div><div class="logo-sub">Engenharia</div></div>
+        </div>
+        <div class="eyebrow" style="margin-top:20px;">O que fazemos</div>
+        <h2 class="title-dark" style="font-size:22px;margin-top:8px;">Nossa<br>especialidade.</h2>
+        <ul class="svc-list">
+          <li class="svc-item"><span class="svc-n">01</span>Incorporação residencial<span class="svc-arr">→</span></li>
+          <li class="svc-item"><span class="svc-n">02</span>Projetos comerciais<span class="svc-arr">→</span></li>
+          <li class="svc-item"><span class="svc-n">03</span>Reforma e retrofit<span class="svc-arr">→</span></li>
+          <li class="svc-item"><span class="svc-n">04</span>Consultoria técnica<span class="svc-arr">→</span></li>
+        </ul>
+      </div>
+      <div class="site-dark">pedraforma.com.br</div>
+    </div>
+  </div>
+
+  <!-- 3: FOTO FACHADA -->
+  <div class="card c3">
+    <div class="photo"></div>
+    <div class="ov-bottom"></div>
+    <div class="content">
+      <div class="logo-bar">
+        <div class="logo-sq"><svg viewBox="0 0 14 14" fill="none"><rect x="1" y="7" width="5" height="6" fill="#1C1714"/><rect x="8" y="1" width="5" height="6" fill="#1C1714"/><rect x="8" y="8" width="5" height="5" fill="#1C1714" opacity=".4"/></svg></div>
+        <div><div class="logo-txt">Pedra & Forma</div></div>
+      </div>
+      <div>
+        <div class="eyebrow" style="margin-bottom:10px;">Projeto entregue</div>
+        <h2 class="title-light">Fachadas que<br><em class="title-em">impressionam.</em></h2>
+        <div style="margin-top:12px;" class="site">pedraforma.com.br · (71) 9 9999-0000</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4: LANÇAMENTO WIDE -->
+  <div class="card c4">
+    <div class="photo"></div>
+    <div class="ov-dark"></div>
+    <div class="content">
+      <div class="c4-left">
+        <div>
+          <div class="tag" style="margin-bottom:14px;">Novo lançamento</div>
+          <div class="eyebrow" style="margin-bottom:10px;">Pituba · Salvador · BA</div>
+          <h2 class="title-light">Edifício<br><em class="title-em">Calcário</em></h2>
+        </div>
+        <div style="font-size:10px;color:rgba(245,237,217,.5);letter-spacing:.06em;">2 e 3 quartos · Varanda gourmet · 2 vagas · Entrega Dez/2027</div>
+      </div>
+      <div class="c4-right">
+        <div class="price-label">A partir de</div>
+        <div class="price-val">R$680<span style="font-size:16px;font-weight:300;">mil</span></div>
+        <div class="price-sub">Condições especiais<br>na planta</div>
+        <button class="cta-btn" style="margin-top:12px;font-size:8px;">Agendar visita</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5: FOTO IMÓVEL -->
+  <div class="card c5">
+    <div class="photo"></div>
+    <div class="ov-bottom"></div>
+    <div class="content">
+      <div style="display:flex;justify-content:flex-start;">
+        <div class="tag-outline" style="font-size:7px;padding:4px 10px;">Alto padrão</div>
+      </div>
+      <div>
+        <h2 class="title-light">A casa dos<br>seus <em class="title-em">sonhos</em><br>existe.</h2>
+        <div style="margin-top:10px;" class="site">pedraforma.com.br</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6: DARK INSTITUCIONAL -->
+  <div class="card c6">
+    <div class="ov-dark-full"></div>
+    <div class="content">
+      <div>
+        <div class="eyebrow">Pedra & Forma · Est. 2007</div>
+        <h2 class="title-light" style="font-size:22px;margin-top:10px;">Da ideia ao<br><em class="title-em">acabamento</em><br>final.</h2>
+        <div class="divider"></div>
+        <p class="desc-light">Somos referência em reforma e inovação há 18 anos em Salvador.</p>
+      </div>
+      <div>
+        <div style="font-size:10px;color:rgba(245,237,217,.5);margin-bottom:6px;">★★★★★ +200 obras entregues</div>
+        <div class="site">pedraforma.com.br</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7: BANNER INTERIOR WIDE -->
+  <div class="card c7">
+    <div class="photo"></div>
+    <div class="ov-center"></div>
+    <div class="content">
+      <div class="eyebrow" style="letter-spacing:.3em;">Pedra & Forma Engenharia</div>
+      <h2 class="title-light">Interiores que <em class="title-em">inspiram.</em></h2>
+      <div class="cta-btn">Conheça nossos projetos</div>
+    </div>
+  </div>
+
+  <!-- 8: ÁREA GOURMET -->
+  <div class="card c8">
+    <div class="photo"></div>
+    <div class="ov-bottom"></div>
+    <div class="content">
+      <div style="display:flex;justify-content:flex-end;">
+        <div class="logo-sq"><svg viewBox="0 0 14 14" fill="none"><rect x="1" y="7" width="5" height="6" fill="#1C1714"/><rect x="8" y="1" width="5" height="6" fill="#1C1714"/><rect x="8" y="8" width="5" height="5" fill="#1C1714" opacity=".4"/></svg></div>
+      </div>
+      <div>
+        <div class="eyebrow" style="margin-bottom:8px;">Área de lazer</div>
+        <h2 class="title-light">Cada <em class="title-em">detalhe</em><br>pensado<br>pra você.</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9: AMENIDADES -->
+  <div class="card c9">
+    <div class="ov-dark-full"></div>
+    <div class="content">
+      <div>
+        <div class="eyebrow">Diferenciais exclusivos</div>
+        <h2>O que nos<br><em class="title-em">diferencia.</em></h2>
+        <div class="amenities">
+          <div class="am-item"><div class="am-icon">⬡</div><div class="am-label">Piscina privativa</div></div>
+          <div class="am-item"><div class="am-icon">◈</div><div class="am-label">Varanda gourmet</div></div>
+          <div class="am-item"><div class="am-icon">◉</div><div class="am-label">2 vagas cobertas</div></div>
+          <div class="am-item"><div class="am-icon">◆</div><div class="am-label">Segurança 24h</div></div>
+        </div>
+      </div>
+      <div class="site">pedraforma.com.br</div>
+    </div>
+  </div>
+
+  <!-- 10: DEPOIMENTO -->
+  <div class="card c10">
+    <div class="photo"></div>
+    <div class="ov-dark"></div>
+    <div class="content">
+      <div style="display:flex;justify-content:flex-start;padding-top:4px;">
+        <div class="tag" style="font-size:7px;padding:4px 10px;">Depoimento</div>
+      </div>
+      <div>
+        <div class="quote-mark">"</div>
+        <div class="quote-text">Entregaram antes do prazo e superaram tudo que esperávamos.</div>
+        <div class="quote-auth">Família Rodrigues · Cliente desde 2021</div>
+      </div>
+      <div>
+        <div style="font-size:9px;color:#C8A96E;letter-spacing:.08em;">★★★★★</div>
+        <div class="site" style="margin-top:5px;">pedraforma.com.br</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <span>© 2025 Pedra & Forma Engenharia · Salvador, BA</span>
+  <span>Kit gerado para uso em redes sociais</span>
+</div>
+
+</body>
+</html>
